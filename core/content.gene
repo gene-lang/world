@@ -1,5 +1,5 @@
 # The Commons' content registries, and how a content module fills them —
-# docs/proposals/world.md §13.1, §15.6.
+# docs/world.md §13.1, §15.6.
 #
 # Content is data a client receives rather than code it runs: a node's tiles
 # and flags, and the appearance tiles an entity names in its `core/appearance`

@@ -6,3 +6,6 @@
 
 # The default world directory of `gene run world` (--root data/world).
 /data/
+
+# Scratch output.
+/tmp/

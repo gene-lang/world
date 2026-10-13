@@ -1,5 +1,10 @@
 # Milestones — what each one delivered, and the evidence
 
+> **Paths in this record.** It was written when the Commons lived at `examples/world` in the
+> [Gene repository](https://github.com/gene-lang/gene-new), beside `examples/life` and `examples/miclone`. Each is now a repository
+> of its own. The paths, commits and commands below are kept as they were recorded; `docs/proposals/world.md`
+> is now [`docs/world.md`](docs/world.md).
+
 The plan is `docs/proposals/world.md` §17. Milestone 0 (the copy-and-adapt
 starting point) is recorded in [`SOURCES.md`](SOURCES.md).
 

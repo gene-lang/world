@@ -1,5 +1,5 @@
 {
-  # The Commons (docs/proposals/world.md). SOURCES.md has the provenance of the
+  # The Commons (docs/world.md). SOURCES.md has the provenance of the
   # code that was copied from Miclone to start it.
   ^format 1
   ^name "gene/world"
@@ -7,7 +7,7 @@
   ^version "0.1.0"
   ^library {^entry "core/world.gene"}
   ^applications [
-    # The Commons world process (docs/proposals/world.md §16.3).
+    # The Commons world process (docs/world.md §16.3).
     (application "world" ^entry "server/main.gene")
 
     # The web build of every portable module (`gene run build_web`).

@@ -1,4 +1,4 @@
-# The Commons HTTP/WebSocket host — docs/proposals/world.md §9.1, §9.4, §16.3.
+# The Commons HTTP/WebSocket host — docs/world.md §9.1, §9.4, §16.3.
 #
 # Same-origin hosting on loopback: the player page, its compiled client, the
 # sign-in form and the WebSocket endpoint are all served by the world process

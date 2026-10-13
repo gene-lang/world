@@ -6,7 +6,7 @@
 // It creates a throwaway world, provisions a player, starts `gene run world
 // run` as its own process, and speaks the protocol exactly as the browser page
 // does (cookie session, same-origin `Origin`, `gene.world.v1`). Then it checks
-// what docs/proposals/world.md §17 asks Milestone 1 to prove:
+// what docs/world.md §17 asks Milestone 1 to prove:
 //
 //   - admission: wrong Origin, no session, no subprotocol and a bad code are
 //     refused before anything is upgraded (§9.4);
@@ -33,7 +33,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 
 const PKG = new URL("../", import.meta.url).pathname;
-const GENE = process.env.GENE ?? new URL("../../../bin/gene", import.meta.url).pathname;
+const GENE = "gene";              // taken from PATH
 const PORT = Number(process.env.COMMONS_SMOKE_PORT ?? 8097);
 const ORIGIN = `http://127.0.0.1:${PORT}`;
 const ROOT = mkdtempSync(path.join(tmpdir(), "commons-smoke-"));

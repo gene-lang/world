@@ -1,4 +1,4 @@
-# The Commons world store — docs/proposals/world.md §12.1, §12.2, §12.8.
+# The Commons world store — docs/world.md §12.1, §12.2, §12.8.
 #
 # One SQLite file, `world.sqlite`, owned by the world process. It is opened with
 # `$db/sqlite/open_file`: SQLite's own pager and write-ahead log make each

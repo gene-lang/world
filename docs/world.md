@@ -1,13 +1,15 @@
 # Gene World: An Expandable Human–AI Commons
 
-**Status:** Experimental design proposal, not an implementation report. Implementation status and evidence: `examples/world/MILESTONES.md`.
+**Status:** Experimental design proposal, not an implementation report. Implementation status and evidence: [`MILESTONES.md`](../MILESTONES.md).
 **Date:** 2026-09-21.
 **Updated:** 2026-10-12.
 **Revision:** 7 — reorganization, no design change: a reading note; the former §19 and §20 (decisions kept visible, basis and references, review disposition) are now Appendix A, which also holds the review attributions that stood in §8.4 and §12.8 and the dispositions of the 2026-10-12 review; milestone status is delegated to `examples/world/MILESTONES.md`; storage statements that had been overtaken are corrected (the incremental `$db/sqlite/open_file` store exists and the reported Life slowdown was reproduced and fixed). Revision 6 — ordered non-terminal action statuses (status revisions), a decision path for suspended activity, and continuations admitted only against a synchronized view (§6.3, §8.4, §12.3). Revision 5 — one world-result dispatcher with data continuations; physical revision/receipt retention; incremental disk-backed storage in milestones 1–3. Preserve the copy-and-adapt policy and browser-first rollout.
-**Companion:** The latest reviewed `life.md`
+**Companion:** The latest reviewed `life.md`, now [`docs/life.md`](https://github.com/gene-lang/life/blob/main/docs/life.md) in the Life repository
 **Decision:** One authoritative world process, one separate process per AI Life, and a browser player client for humans. Human and AI controllers use the same world-action contracts over WebSocket. Keep HTTP for pages/assets and explicit application-level receipts, replay, and reconnection for live interaction. Miclone is a source reference for copied code, not a required package, engine, or service.
 
 > One shared reality for human players and independent AI Lives. Humans act through a browser; each Life acts through Gene code in its own process. Places, possessions, conversations, and consequences persist as the world grows.
+
+**Paths in this document.** It was written as `docs/proposals/world.md` in the [Gene repository](https://github.com/gene-lang/gene-new), when the Commons, Life and Miclone lived there as `examples/world`, `examples/life` and `examples/miclone`. Each is now a repository of its own: read `examples/world` as this repository, `examples/life` as the [Life repository](https://github.com/gene-lang/life), and `examples/miclone` as the Miclone repository. `src/genex/…` paths name the Gene repository. The body keeps the paths it was approved with.
 
 **How to read this document.** It has three parts. **Part I, the design (§1–§16)**, is the stable specification: processes, world model, protocol, delivery, persistence, expansion and the browser. Its rules hold regardless of how much has been built. **Part II, the plan (§17–§18)**, lists the milestones and acceptance tests; what each milestone delivered, and the evidence, is recorded in `examples/world/MILESTONES.md`, not here. **Appendix A, decisions and rationale**, keeps the review findings, alternatives and revision notes behind the design; each entry is keyed to the section it explains. Section numbers are stable: code comments, tests and `MILESTONES.md` cite them.
 
@@ -1625,7 +1627,7 @@ Specify and measure the action/interaction targets in §7.5 and the physical-sto
 
 ## 17. Implementation milestones
 
-This section is the plan: what each milestone must deliver. Milestones 0–2 are delivered; what each one built, the evidence, and what it carried forward are in `examples/world/MILESTONES.md`. The text of a delivered milestone is kept as it was approved.
+This section is the plan: what each milestone must deliver. Milestones 0–2 are delivered; what each one built, the evidence, and what it carried forward are in [`MILESTONES.md`](../MILESTONES.md). The text of a delivered milestone is kept as it was approved.
 
 ### Milestone 0: make a self-contained source starting point
 

@@ -16,7 +16,7 @@ import path from "node:path";
 import { texts, values, fire, tick, created } from "./dom_stub.mjs";
 
 const PKG = new URL("../", import.meta.url).pathname;
-const GENE = process.env.GENE ?? new URL("../../../bin/gene", import.meta.url).pathname;
+const GENE = "gene";              // taken from PATH
 const PORT = Number(process.env.CLIENT_SMOKE_PORT ?? 8098);
 const ORIGIN = `http://127.0.0.1:${PORT}`;
 const ROOT = mkdtempSync(path.join(tmpdir(), "commons-client-"));

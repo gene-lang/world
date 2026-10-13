@@ -5,7 +5,7 @@
 # the web profile has no `$test`, so the shared half reports instead of
 # asserting, and this is where the assertions are.
 #
-#   gene test                        # from examples/world: these and the process tests
+#   gene test                        # from the repository root: these and the process tests
 #   gene test tests/core_spec.gene   # these alone, well under a minute
 (import $test [describe it assert_equal])
 (import [build] ^from "../tools/build_web.gene")

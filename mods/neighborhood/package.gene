@@ -5,7 +5,7 @@
   # the browser draws for a pending destination and a last-saved position.
   # `core/mods.gene` registers it; a saved region keeps node names, so a later
   # module can add content without changing what an existing place means
-  # (docs/proposals/world.md §5.3).
+  # (docs/world.md §5.3).
   ^format 1
   ^name "commons/neighborhood"
   ^description "Ground, building materials and appearance tiles for the Commons neighborhood"

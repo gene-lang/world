@@ -1,4 +1,4 @@
-# The Commons browser player — docs/proposals/world.md /15, /10.7, /11.3.
+# The Commons browser player — docs/world.md /15, /10.7, /11.3.
 #
 # A player client, not a copy of the simulation. It renders the region and the
 # entities the world describes, and every change it wants is a versioned

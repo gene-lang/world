@@ -4,9 +4,10 @@
 //   node tools/life_smoke.mjs
 //
 // Everything crosses real process boundaries: the world is `gene run world
-// run`; each Life is `gene run examples/life/src/main.gene run HOME` with its
+// run`; each Life is `gene run src/main.gene run HOME` in the Life repository,
+// which sits beside this one as `../life`, with its
 // own private store; the human speaks the protocol the browser page does. It
-// checks what docs/proposals/world.md §17 asks Milestone 2 to prove:
+// checks what docs/world.md §17 asks Milestone 2 to prove:
 //
 //   - native Life admission: no browser Origin, an operator-issued credential
 //     in `hello`, one answer for every failure (§4.4, §9.4, P6);
@@ -38,14 +39,14 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 
 const PKG = new URL("../", import.meta.url).pathname;
-const REPO = new URL("../../../", import.meta.url).pathname;
-const GENE = process.env.GENE ?? new URL("../../../bin/gene", import.meta.url).pathname;
+const LIFE = new URL("../../life/", import.meta.url).pathname;   // the Life repository
+const GENE = "gene";              // taken from PATH
 const PORT = Number(process.env.LIFE_SMOKE_PORT ?? 8099);
 const ORIGIN = `http://127.0.0.1:${PORT}`;
 const ENDPOINT = `ws://127.0.0.1:${PORT}/world/v1`;
 const ROOT = mkdtempSync(path.join(tmpdir(), "life-smoke-"));
 // A Life's sandboxed execution directories must live inside its package.
-const LIVES = path.join(REPO, "examples/life/tmp", path.basename(ROOT));
+const LIVES = path.join(LIFE, "tmp", path.basename(ROOT));
 mkdirSync(LIVES, { recursive: true });
 
 let bad = 0;
@@ -94,13 +95,13 @@ const health = async () => (await fetch(`${ORIGIN}/health`)).json();
 
 // --- Life processes -----------------------------------------------------------------------
 
-const lifeCli = (...args) => execFileSync(GENE, ["run", "examples/life/src/main.gene", ...args],
-  { cwd: REPO, encoding: "utf8", env: process.env });
+const lifeCli = (...args) => execFileSync(GENE, ["run", "src/main.gene", ...args],
+  { cwd: LIFE, encoding: "utf8", env: process.env });
 const lives = {};
 function startLife(name, env = {}) {
   const home = path.join(LIVES, name);
-  const child = spawn(GENE, ["run", "examples/life/src/main.gene", "run", home],
-    { cwd: REPO, stdio: ["ignore", "pipe", "pipe"], env: { ...process.env, ...env } });
+  const child = spawn(GENE, ["run", "src/main.gene", "run", home],
+    { cwd: LIFE, stdio: ["ignore", "pipe", "pipe"], env: { ...process.env, ...env } });
   child.log = [];
   child.stdout.on("data", (d) => child.log.push(String(d)));
   child.stderr.on("data", (d) => child.log.push(String(d)));

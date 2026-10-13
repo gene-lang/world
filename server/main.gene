@@ -1,4 +1,4 @@
-# The Commons world process — docs/proposals/world.md §16.3.
+# The Commons world process — docs/world.md §16.3.
 #
 #   gene run world create                     create a new world (once)
 #   gene run world player add <id> <name...>  provision a human player; prints a login code

@@ -2,10 +2,10 @@
 
 A shared persistent human–AI world: one authoritative world process, browser
 players, and AI Lives speaking the same versioned action contracts. The design
-is [`docs/proposals/world.md`](../../docs/proposals/world.md) ("Gene World: An
+is [`docs/world.md`](docs/world.md) ("Gene World: An
 Expandable Human–AI Commons"). This tree is the Commons' source of record,
 started by the proposal's Milestone 0 as a copy-and-adapt of the Miclone voxel
-engine. It is self-contained, with no dependency on `examples/miclone`.
+engine. It is self-contained, with no dependency on Miclone.
 
 ## Status: Milestone 2
 
@@ -13,7 +13,7 @@ One world, one or more browser players, and independent Life processes. The
 world process owns the neighborhood, its unique watering can, server-owned
 walking, local speech, durable receipts, control-generation fencing and an
 incremental on-disk store, and serves the player page itself. Gene Lives
-(`examples/life`) attach through `genex/websocket` with operator-issued
+([Life](https://github.com/gene-lang/life)) attach through `genex/websocket` with operator-issued
 credentials, each with its own process and private store, and act through the
 same operations a person's clicks send. [`MILESTONES.md`](MILESTONES.md) maps
 every Milestone 1 and 2 requirement to its implementation and evidence and
@@ -22,13 +22,13 @@ provenance record.
 
 **Reading copied comments.** Most comments are Miclone's own history. In them:
 
-- `design.md` means **Miclone's** `examples/miclone/docs/design.md` at the
-  source commit, not this repository's `docs/design.md`, which is the Gene
-  language design.
+- `design.md` means **Miclone's** `docs/design.md` at the source commit, when
+  Miclone lived at `examples/miclone` in the Gene repository. It is not a
+  document in this repository.
 - Bare `§N` / `§DN` references are Miclone's sections too.
 - Milestones `M0`–`M8` are Miclone's, not the Commons'.
 
-Commons references name `docs/proposals/world.md` explicitly.
+Commons references name `docs/world.md` explicitly.
 
 ## Layout
 
@@ -54,19 +54,20 @@ the client compiled from `client/main.gene`. `dist/` (web build output),
 
 ## Build and run
 
-Build optimized Gene from the repository root. With an unoptimized build,
-world generation is about 10× slower and the smoke's 300 s listen budget
-trips.
+The Commons needs the `gene` executable on `PATH`. Build optimized Gene in a
+[Gene checkout](https://github.com/gene-lang/gene-new) and add its `bin` directory to `PATH` as an absolute
+path. With an unoptimized build, world generation is about 10× slower and the
+smoke's 300 s listen budget trips.
 
 ```sh
-nimble speedy
-export PATH="$(pwd)/bin:$PATH"
+nimble speedy                              # in the Gene checkout
+export PATH="/path/to/gene-new/bin:$PATH"
 ```
 
 If linking fails on macOS, point `SDKROOT` at an installed SDK, e.g.
 `SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk nimble speedy`.
 
-Then, from `examples/world/`:
+Then, from this repository's root:
 
 ```sh
 gene run world create                     # once; --root DIR (default data/world)
@@ -82,23 +83,28 @@ Provisioning needs the world stopped (one writer).
 
 ### Attach a Life
 
-A Life is its own process with its own store (`examples/life`), attached over
-a WebSocket with a credential the operator issues for its id. It needs the
-`genex/websocket` native library (libcurl ≥ 8.11 with WebSocket support):
+A Life is its own process with its own store, in the [Life repository](https://github.com/gene-lang/life),
+attached over a WebSocket with a credential the operator issues for its id. It
+needs the `genex/websocket` native library (libcurl ≥ 8.11 with WebSocket
+support), which is built in the Gene checkout. The commands below assume Life
+and Gene are cloned beside this repository as `../life` and `../gene-new`:
 
 ```sh
-# once, from the repository root
+# once, in the Gene checkout
 python3 src/genex/websocket/tools/build.py --pkg-config-path "$(brew --prefix curl)/lib/pkgconfig"
 
-bin/gene run examples/life/src/main.gene create examples/life/homes/aster --network
+# in the Life repository
+gene run src/main.gene create homes/aster --network
 #   → {"id":"life-…", …}
-(cd examples/world && gene run world life add life-… "Aster" --credential-out /tmp/aster.credential)
-bin/gene run examples/life/src/main.gene bind examples/life/homes/aster ws://127.0.0.1:8096/world/v1 /tmp/aster.credential
-bin/gene run examples/life/src/main.gene run examples/life/homes/aster
+# in this repository
+gene run world life add life-… "Aster" --credential-out /tmp/aster.credential
+# in the Life repository
+gene run src/main.gene bind homes/aster ws://127.0.0.1:8096/world/v1 /tmp/aster.credential
+gene run src/main.gene run homes/aster
 ```
 
 A Life's home must be inside the Life package (it runs its programs in
-sandboxed directories there); `examples/life/homes/` is the place for one you
+sandboxed directories there); its `homes/` directory is the place for one you
 keep. The fake brain walks to the garden
 and says so when it arrives — a data continuation, not a waiting program —
 and acknowledges a person who speaks to it. `bind` copies the credential into
@@ -106,7 +112,7 @@ an owner-only file beside the Life's store; delete the one you were handed.
 
 ## Test
 
-The suite is Gene tests, run from `examples/world/`:
+The suite is Gene tests, run from this repository's root:
 
 ```sh
 gene test                        # everything, about three minutes on an idle machine
@@ -129,7 +135,9 @@ gene run build_web --clean       # the web build alone, after adding or removing
 ### The world process, and networked Lives
 
 `tests/process_spec.gene` starts real processes: a throwaway world
-(`gene run world run`, ports 8097–8099) and whoever plays it. The players are
+(`gene run world run`, ports 8097–8099) and whoever plays it. The scripts start
+the `gene` on `PATH`; the Life test also needs the Life repository at `../life`
+and the WebSocket library built in `../gene-new`. The players are
 Node scripts, each of which can also be run alone:
 
 ```sh
@@ -149,8 +157,8 @@ process outright.
 
 The Life package has its own suite, which drives the same network code
 against an in-memory world that can lose replies, answer `unknown`, replay
-and skip sequences (from the repository root):
+and skip sequences (in the Life repository):
 
 ```sh
-bin/gene test --package-root examples/life examples/life/tests/
+gene test tests/
 ```

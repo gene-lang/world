@@ -1,4 +1,4 @@
-# Participants, logins and sessions — docs/proposals/world.md §4.4, §9.4, §12.7.
+# Participants, logins and sessions — docs/world.md §4.4, §9.4, §12.7.
 #
 # The local operator provisions a human player: a stable `player_id`, a
 # server-owned `participant_id`, and one avatar entity that belongs to that

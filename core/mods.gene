@@ -1,4 +1,4 @@
-# The content list — docs/proposals/world.md §13.1: a selected module list and
+# The content list — docs/world.md §13.1: a selected module list and
 # normal Gene loading.
 #
 # **One list, and this is it.** The world process calls `load_mods` once and

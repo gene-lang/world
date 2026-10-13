@@ -1,4 +1,4 @@
-# The Commons wire protocol, server half — docs/proposals/world.md §9.
+# The Commons wire protocol, server half — docs/world.md §9.
 #
 # One complete UTF-8 JSON object per WebSocket message (§9.2). This module owns
 # what "a valid message" means on the way in and how every message is built on

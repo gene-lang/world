@@ -1,4 +1,4 @@
-# Walking — docs/proposals/world.md §5.3, §6.2, §6.5.
+# Walking — docs/world.md §5.3, §6.2, §6.5.
 #
 # The world owns movement. A walk is resolved here on a one-metre navigation
 # grid laid over the region's nodes, then advanced by the simulation a fixed

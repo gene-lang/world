@@ -1,5 +1,10 @@
 # SOURCES — provenance for the Commons' copied source
 
+> **Paths in this record.** It was written when the Commons lived at `examples/world` in the
+> [Gene repository](https://github.com/gene-lang/gene-new), beside `examples/life` and `examples/miclone`. Each is now a repository
+> of its own. The paths, commits and commands below are kept as they were recorded; `docs/proposals/world.md`
+> is now [`docs/world.md`](docs/world.md).
+
 This is the provenance record required by `docs/proposals/world.md` §1.4 and
 Milestone 0 (§17). It is provenance only, not a dependency manifest. It covers:
 
